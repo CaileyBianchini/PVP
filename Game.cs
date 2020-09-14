@@ -23,9 +23,6 @@ namespace HelloWorld
     struct Items
     {
         public int statBoost;
-
-
-
     }
 
 
@@ -93,6 +90,7 @@ namespace HelloWorld
 
                 }
             }
+
         }
 
         public void EquipItems()
@@ -110,9 +108,11 @@ namespace HelloWorld
             {
                 _player1.damage += dagger.statBoost;
             }
+            Console.WriteLine("\nPlayer One.");
+            PrintStats(_player1);
 
             //player 2
-            GetInput(out input, "Long Sword", "Dagger", "Welcome! Player two CHOOSE YOUR WEAPON!");
+            GetInput(out input, "Long Sword", "Dagger", "\nWelcome! Player two CHOOSE YOUR WEAPON!");
 
             if (input == '1')
             {
@@ -123,7 +123,8 @@ namespace HelloWorld
                 _player2.damage += dagger.statBoost;
             }
 
-
+            Console.WriteLine("\nPlayer One.");
+            PrintStats(_player1);
         }
 
         //Performed once when the game begins
@@ -136,7 +137,7 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
-
+            EquipItems();
         }
 
         //Performed once when the game ends

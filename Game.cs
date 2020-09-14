@@ -11,8 +11,6 @@ namespace HelloWorld
     //must loop till player is dead
     //upgrade their stats as structs
 
-   
-
     struct Items
     {
         public int statBoost;
@@ -47,26 +45,13 @@ namespace HelloWorld
             Console.Clear();
         }
 
-        //public void InitializePlayers()
-        //{
-        //    _player1.health = 100;
-        //    _player1.damage = 5;
-
-        //    _player2.health = 100;
-        //    _player2.damage = 5;
-        //}
-
         public void InitializeItems()
         {
             longSword.statBoost = 15;
             dagger.statBoost = 10;
         }
 
-        public void PrintStats(Player player)
-        {
-            Console.WriteLine("Health: " + player.health);
-            Console.WriteLine("Damage: " + player.damage);
-        }
+
 
 
         // INPUTS
@@ -91,7 +76,7 @@ namespace HelloWorld
 
         }
 
-        public void EquipItems()
+        public void SelectItems()
         {
             char input;
 
@@ -100,29 +85,29 @@ namespace HelloWorld
 
             if (input == '1')
             {
-                _player1.damage += longSword.statBoost;
+                _player1.EquipItem(longSword);
             }
             if (input == '2')
             {
-                _player1.damage += dagger.statBoost;
+                _player1.EquipItem(dagger);
             }
             Console.WriteLine("\nPlayer One.");
-            PrintStats(_player1);
+            _player1.PrintStats();
 
             //player 2
             GetInput(out input, "Long Sword", "Dagger", "\nWelcome! Player two CHOOSE YOUR WEAPON!");
 
             if (input == '1')
             {
-                _player2.damage += longSword.statBoost;
+                _player2.EquipItem(longSword);
             }
             if (input == '2')
             {
-                _player2.damage += dagger.statBoost;
+                _player2.EquipItem(dagger);
             }
 
             Console.WriteLine("\nPlayer two.");
-            PrintStats(_player2);
+            _player2.PrintStats();
 
             Continue();
         }
@@ -132,13 +117,13 @@ namespace HelloWorld
         {
             Console.WriteLine("Now......GO! FIGHT TO THE DEATH!");
 
-            while(_player1.health > 0 &&  _player2.health > 0)
+            while(_player1.GetIsAlive() &&  _player2.GetIsAlive())
             {
                 //prints player one and two's stat
                 Console.WriteLine("Player one");
-                PrintStats(_player1);
+                _player1.PrintStats();
                 Console.WriteLine("Player two");
-                PrintStats(_player2);
+                _player2.PrintStats();
 
                 char input;
 
@@ -147,8 +132,7 @@ namespace HelloWorld
 
                 if(input == '1')
                 {
-                    _player2.health -= _player1.damage;
-                    Console.WriteLine("\nPlayer one dealt " + _player1.damage + " damage to Player two!");
+                    _player2.Attack(_player1);
                 }
                 if(input == '2')
                 {
@@ -163,8 +147,7 @@ namespace HelloWorld
 
                 if (input == '1')
                 {
-                    _player1.health -= _player2.damage;
-                    Console.WriteLine("\nPlayer two dealt " + _player2.damage + " damage to Player one!");
+                    _player1.Attack(_player2);
                 }
                 if (input == '2')
                 {
@@ -175,7 +158,7 @@ namespace HelloWorld
                 Continue();
             }
 
-            if(_player1.health > 0)
+            if(_player1.GetIsAlive())
             {
                 Console.WriteLine("WINNER! PLAYER ONE!!!!!!!!!!!");
             }
@@ -198,7 +181,7 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
-            EquipItems();
+            SelectItems();
             StartBattle();
         }
 

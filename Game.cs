@@ -11,14 +11,7 @@ namespace HelloWorld
     //must loop till player is dead
     //upgrade their stats as structs
 
-    struct Player
-    {
-        // public string name1; do later
-        public int health;
-        public int damage;
-
-    }
-
+   
 
     struct Items
     {
@@ -30,8 +23,8 @@ namespace HelloWorld
     {
         bool _gameOver = false;
 
-        Player _player1;
-        Player _player2;
+        Player _player1 = new Player("Karen", 177, 013);
+        Player _player2 = new Player("Bob", 420, 69);
         Items longSword;
         Items dagger;
 
@@ -54,14 +47,14 @@ namespace HelloWorld
             Console.Clear();
         }
 
-        public void InitializePlayers()
-        {
-            _player1.health = 100;
-            _player1.damage = 5;
+        //public void InitializePlayers()
+        //{
+        //    _player1.health = 100;
+        //    _player1.damage = 5;
 
-            _player2.health = 100;
-            _player2.damage = 5;
-        }
+        //    _player2.health = 100;
+        //    _player2.damage = 5;
+        //}
 
         public void InitializeItems()
         {
@@ -198,7 +191,7 @@ namespace HelloWorld
         //Performed once when the game begins
         public void Start()
         {
-            InitializePlayers();
+            //InitializePlayers();
             InitializeItems();
         }
 

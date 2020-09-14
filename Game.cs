@@ -137,18 +137,20 @@ namespace HelloWorld
 
         public void StartBattle()
         {
-            Console.WriteLine("\nNow......GO! FIGHT TO THE DEATH!");
+            Console.WriteLine("Now......GO! FIGHT TO THE DEATH!");
 
             while(_player1.health > 0 &&  _player2.health > 0)
             {
                 //prints player one and two's stat
+                Console.WriteLine("Player one");
                 PrintStats(_player1);
+                Console.WriteLine("Player two");
                 PrintStats(_player2);
 
                 char input;
 
                 //Player One
-                GetInput(out input, "Attack", "Peace", "Player one! What do you wish to do?");
+                GetInput(out input, "Attack", "Peace", "\nPlayer one! What do you wish to do?");
 
                 if(input == '1')
                 {
@@ -157,7 +159,7 @@ namespace HelloWorld
                 }
                 if(input == '2')
                 {
-                    Console.WriteLine("Player one went with a peaceful option! Hopefully Player two feels the same!");
+                    Console.WriteLine("\nPlayer one went with a peaceful option! Hopefully Player two feels the same!");
 
                 }
 
@@ -173,12 +175,22 @@ namespace HelloWorld
                 }
                 if (input == '2')
                 {
-                    Console.WriteLine("Player two went with a peaceful option! Hopefully Player one feels the same!");
+                    Console.WriteLine("\nPlayer two went with a peaceful option! Hopefully Player one feels the same!");
 
                 }
 
                 Continue();
             }
+
+            if(_player1.health > 0)
+            {
+                Console.WriteLine("WINNER! PLAYER ONE!!!!!!!!!!!");
+            }
+            else
+            {
+                Console.WriteLine("WINNER! PLAYER TWO!!!!!!!!!!!!");
+            }
+            _gameOver = true;
         }
 
 

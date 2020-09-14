@@ -112,6 +112,13 @@ namespace HelloWorld
             Continue();
         }
 
+        public void CreateCharacter(Player player)
+        {
+            Console.WriteLine("What is your name?");
+            string name = Console.ReadLine();
+            player = new Player(name, 100, 10);
+            
+        }
 
         public void StartBattle()
         {
@@ -181,6 +188,8 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
+            CreateCharacter(_player1);
+            CreateCharacter(_player2);
             SelectItems();
             StartBattle();
         }

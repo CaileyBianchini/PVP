@@ -258,9 +258,22 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
+            char input;
+            GetInput(out input, "Single Player", "PvP", "Which style do you ish to play?");
             _player1 = CreateCharacter();
-            _player2 = CreateCharacter();
-            StartBattle();
+            if (input == '1')
+            {
+                Single single = new Single();
+                //Run the Game
+                single.Run();
+                //Wait before closing
+                Console.ReadKey();
+            }
+            if (input == '2')
+            {
+                _player2 = CreateCharacter();
+                StartBattle();
+            }
         }
 
         //Performed once when the game ends

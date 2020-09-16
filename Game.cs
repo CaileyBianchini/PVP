@@ -21,10 +21,10 @@ namespace HelloWorld
     {
         bool _gameOver = false;
 
-        Player _player1 = new Player("Karen", 177, 013);
-        Player _player2 = new Player("Bob", 420, 69);
-        Items longSword;
-        Items dagger;
+        private Player _player1 = new Player("Karen", 177, 013);
+        private Player _player2 = new Player("Bob", 420, 69);
+        private Items _longSword;
+        private Items _dagger;
 
 
         //Run the game
@@ -47,8 +47,8 @@ namespace HelloWorld
 
         public void InitializeItems()
         {
-            longSword.statBoost = 15;
-            dagger.statBoost = 10;
+            _longSword.statBoost = 15;
+            _dagger.statBoost = 10;
         }
 
 
@@ -76,7 +76,7 @@ namespace HelloWorld
 
         }
 
-        public void SelectItems()
+        public void SelectItems(Player player)
         {
             char input;
 
@@ -85,39 +85,22 @@ namespace HelloWorld
 
             if (input == '1')
             {
-                _player1.EquipItem(longSword);
+                player.EquipItem(_longSword);
             }
             if (input == '2')
             {
-                _player1.EquipItem(dagger);
+                player.EquipItem(_dagger);
             }
-            Console.WriteLine("\nPlayer One.");
-            _player1.PrintStats();
-
-            //player 2
-            GetInput(out input, "Long Sword", "Dagger", "\nWelcome! Player two CHOOSE YOUR WEAPON!");
-
-            if (input == '1')
-            {
-                _player2.EquipItem(longSword);
-            }
-            if (input == '2')
-            {
-                _player2.EquipItem(dagger);
-            }
-
-            Console.WriteLine("\nPlayer two.");
-            _player2.PrintStats();
-
-            Continue();
+ 
         }
 
-        public void CreateCharacter(Player player)
+        public Player CreateCharacter()
         {
             Console.WriteLine("What is your name?");
             string name = Console.ReadLine();
-            player = new Player(name, 100, 10);
-            
+            Player player = new Player(name, 100, 10);
+            SelectItems(player);
+            return player;
         }
 
         public void StartBattle()
@@ -188,9 +171,8 @@ namespace HelloWorld
         //Repeated until the game ends
         public void Update()
         {
-            CreateCharacter(_player1);
-            CreateCharacter(_player2);
-            SelectItems();
+            _player1 = CreateCharacter();
+            _player2 = CreateCharacter();
             StartBattle();
         }
 

@@ -641,16 +641,19 @@ namespace HelloWorld
             {
                 Console.WriteLine("G A M E   O V E R.");
                 Console.WriteLine("You Died.");
+                
             }
             else if (demonkinghealth < 1)
             {
                 Console.WriteLine("Congradulations! You defeated the Demon King! ");
                 //blah blah blah more dialogue
+                
             }
             else
             {
                 Console.WriteLine("Version 0.0.1");
                 Console.WriteLine("You reached the end of what we have. This is an early version of the game. Thank you for playing!");
+
             }
 
             Console.WriteLine("Press [Enter] to End Game.");

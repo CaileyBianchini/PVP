@@ -24,12 +24,18 @@ namespace HelloWorld
 
         private Player _player1;
         private Player _player2;
+
+        //weapons
         private Items _longSword;
         private Items _dagger;
         private Items _ax;
+        private Items _staff;
+
+        //roles
         private Items _hero;
         private Items _assassin;
         private Items _wizard;
+        private Items _barbarian;
         
 
 
@@ -56,6 +62,7 @@ namespace HelloWorld
             _longSword.statBoost = 15;
             _dagger.statBoost = 10;
             _ax.statBoost = 13;
+            _staff.statBoost = 14;
         }
 
         public void InitializeRole()
@@ -66,6 +73,8 @@ namespace HelloWorld
             _assassin.statName = "Assassin";
             _wizard.statBoost = 5;
             _wizard.statName = "Wizard";
+            _barbarian.statBoost = 25;
+            _barbarian.statName = "Barbarian";
         }
 
 
@@ -92,19 +101,20 @@ namespace HelloWorld
             Continue();
         }
 
-        public void GetInput(out char input, string option1, string option2, string option3, string quiry)
+        public void GetInput(out char input, string option1, string option2, string option3, string option4, string quiry)
         {
             Console.WriteLine(quiry);
             Console.WriteLine("1. " + option1);
             Console.WriteLine("2. " + option2);
             Console.WriteLine("3. " + option3);
+            Console.WriteLine("4. " + option4);
             input = ' ';
 
             //loops till valid is received
-            while (input != '1' && input != '2' && input != '3')
+            while (input != '1' && input != '2' && input != '3' && input != '4')
             {
                 input = Console.ReadKey().KeyChar;
-                if (input != '1' && input != '2' && input != '3')
+                if (input != '1' && input != '2' && input != '3' && input != '4')
                 {
                     Console.WriteLine("Invalid Input. Please Try Again.");
 
@@ -118,7 +128,7 @@ namespace HelloWorld
         public void SelectItems(Player player)
         {
             char input;
-            GetInput(out input, "Long Sword", "Dagger", "Ax", "Welcome! CHOOSE YOUR WEAPON!");
+            GetInput(out input, "Long Sword", "Dagger", "Ax", "Staff", "Welcome! CHOOSE YOUR WEAPON!");
 
             if (input == '1')
             {
@@ -132,6 +142,10 @@ namespace HelloWorld
             {
                 player.EquipItem(_ax);
             }
+            if (input == '4')
+            {
+                player.EquipItem(_staff);
+            }
  
         }
 
@@ -139,7 +153,7 @@ namespace HelloWorld
         public void SelectRoles(Player player)
         {
             char input;
-            GetInput(out input, "Hero", "Assassin", "Wizard", "CHOOSE YOUR CLASS!");
+            GetInput(out input, "Hero", "Assassin", "Wizard", "Barbarian", "CHOOSE YOUR CLASS!");
 
             if (input == '1')
             {
@@ -152,6 +166,10 @@ namespace HelloWorld
             if (input == '3')
             {
                 player.EquipRole(_wizard);
+            }
+            if (input == '4')
+            {
+                player.EquipRole(_barbarian);
             }
 
         }

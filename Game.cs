@@ -119,6 +119,8 @@ namespace HelloWorld
         public void End()
         {
             Console.WriteLine("Thank You for playing!");
+            Console.WriteLine("Press [Enter] to close game.");
+            Console.ReadKey();
         }
     }
 }

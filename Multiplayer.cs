@@ -125,19 +125,19 @@ namespace HelloWorld
 
             if (input == '1')
             {
-                player.EquipItem(_longSword);
+                player.AddItemToInventory(_longSword, 0);
             }
             if (input == '2')
             {
-                player.EquipItem(_dagger);
+                player.AddItemToInventory(_dagger, 0);
             }
             if (input == '3')
             {
-                player.EquipItem(_ax);
+                player.AddItemToInventory(_ax, 0);
             }
             if (input == '4')
             {
-                player.EquipItem(_staff);
+                player.AddItemToInventory(_staff, 0);
             }
 
         }
@@ -172,7 +172,7 @@ namespace HelloWorld
         {
             Console.WriteLine("What is your name?");
             string name = Console.ReadLine();
-            Player player = new Player(name, "Peasant", 100, 10);
+            Player player = new Player(name, "Peasant", 100, 10, 5);
             SelectItems(player);
             SelectRoles(player);
             return player;
@@ -183,7 +183,13 @@ namespace HelloWorld
 
         public void StartBattle()
         {
-            Console.WriteLine("Now......GO! FIGHT TO THE DEATH!");
+            Console.WriteLine("FIGHT TILL ONE DIES!!!!!!");
+            int[] numbers = {1, 2, 3};
+            foreach (int number in numbers)
+            {
+                Console.WriteLine(numbers);
+            }
+            Console.WriteLine("Go!");
 
             while (_player1.GetIsAlive() && _player2.GetIsAlive())
             {
@@ -227,6 +233,11 @@ namespace HelloWorld
                 Continue();
             }
 
+            //implenting highscore
+
+
+
+
             if (_player1.GetIsAlive())
             {
                 Console.WriteLine("WINNER! PLAYER ONE!!!!!!!!!!!");
@@ -260,6 +271,8 @@ namespace HelloWorld
         public void End()
         {
             Console.WriteLine("Battle Over!");
+            Console.WriteLine("Press [Enter] to close game.");
+            Console.ReadKey();
         }
     }
 }

@@ -23,6 +23,8 @@ namespace HelloWorld
         private Items _dagger;
         private Items _ax;
         private Items _staff;
+        private Items _mace;
+        private Items _hammer;
 
         //roles
         private Items _hero;
@@ -53,9 +55,17 @@ namespace HelloWorld
         public void InitializeItems()
         {
             _longSword.statBoost = 15;
+            _longSword.statName = "Long Sword";
             _dagger.statBoost = 10;
+            _dagger.statName = "Dagger";
             _ax.statBoost = 13;
+            _ax.statName = "Ax";
             _staff.statBoost = 14;
+            _staff.statName = "Staff";
+            _mace.statBoost = 17;
+            _mace.statName = "Mace";
+            _hammer.statBoost = 9;
+            _hammer.statName = "Hammer";
         }
 
         public void InitializeRole()
@@ -94,6 +104,29 @@ namespace HelloWorld
             Continue();
         }
 
+
+        public void GetInput(out char input, string option1, string option2, string option3, string quiry)
+        {
+            Console.WriteLine(quiry);
+            Console.WriteLine("1. " + option1);
+            Console.WriteLine("2. " + option2);
+            Console.WriteLine("3. " + option3);
+            input = ' ';
+
+            //loops till valid is received
+            while (input != '1' && input != '2' && input != '3')
+            {
+                input = Console.ReadKey().KeyChar;
+                if (input != '1' && input != '2' && input != '3')
+                {
+                    Console.WriteLine("Invalid Input. Please Try Again.");
+
+                }
+            }
+
+            Continue();
+        }
+
         public void GetInput(out char input, string option1, string option2, string option3, string option4, string quiry)
         {
             Console.WriteLine(quiry);
@@ -117,29 +150,34 @@ namespace HelloWorld
             Continue();
         }
 
-        //Weapons
-        public void SelectItems(Player player)
+        public void SelectLoadout(Player player)
         {
+            Console.Clear();
+            Console.WriteLine("Loadout 1:");
+            Console.WriteLine(_longSword.statName);
+            Console.WriteLine(_dagger.statName);
+            Console.WriteLine(_ax.statName);
+
+            Console.WriteLine("\nLoadout 2:");
+            Console.WriteLine(_staff.statName);
+            Console.WriteLine(_mace.statName);
+            Console.WriteLine(_hammer.statName);
+
             char input;
-            GetInput(out input, "Long Sword", "Dagger", "Ax", "Staff", "Welcome! CHOOSE YOUR WEAPON!");
+            GetInput(out input, "Loadout 1", "Loadout 2", "Welcome! CHOOSE YOUR WEAPON!");
 
             if (input == '1')
             {
                 player.AddItemToInventory(_longSword, 0);
+                player.AddItemToInventory(_dagger, 1);
+                player.AddItemToInventory(_ax, 2);
             }
             if (input == '2')
             {
-                player.AddItemToInventory(_dagger, 0);
-            }
-            if (input == '3')
-            {
-                player.AddItemToInventory(_ax, 0);
-            }
-            if (input == '4')
-            {
                 player.AddItemToInventory(_staff, 0);
+                player.AddItemToInventory(_mace, 1);
+                player.AddItemToInventory(_hammer, 2);
             }
-
         }
 
         //Role
@@ -172,22 +210,65 @@ namespace HelloWorld
         {
             Console.WriteLine("What is your name?");
             string name = Console.ReadLine();
-            Player player = new Player(name, "Peasant", 100, 10, 5);
-            SelectItems(player);
+            Player player = new Player(name, "Peasant", 100, 10, 3);
+            //SelectItems(player);
+            SelectLoadout(player);
             SelectRoles(player);
             return player;
         }
 
+        public void SwitchWeapons(Player player)
+        {
+            Items[] inventory = player.GetInventory();
 
+            char input = ' ';
+            //utilize Length, one more entry then what is actually in the array
+            for(int i = 0; i < inventory.Length; i++)
+            {
+                Console.WriteLine((i+1) + ". " + inventory[i].statName + "\n Damage: " + inventory[i].statBoost);
+            }
+            Console.Write("> ");
+            input = Console.ReadKey().KeyChar;
+
+            switch (input)
+            {
+                case '1':
+                    {
+                        player.EquipItem(0);
+                        Console.WriteLine("\nYou equiped " + player.GetInventory()[0].statName);
+                        Console.WriteLine("Main damage increased by " + player.GetInventory()[0].statBoost);
+                        break;
+                    }
+                case '2':
+                    {
+                        player.EquipItem(1);
+                        Console.WriteLine("\nYou equiped " + player.GetInventory()[1].statName);
+                        Console.WriteLine("Main damage increased by " + player.GetInventory()[1].statBoost);
+                        break;
+                    }
+                case '3':
+                    {
+                        player.EquipItem(2);
+                        Console.WriteLine("\nYou equiped " + player.GetInventory()[2].statName);
+                        Console.WriteLine("Main damage increased by " + player.GetInventory()[2].statBoost);
+                        break;
+                    }
+                default:
+                    {
+                        player.UnequipItem();
+                        Console.WriteLine("You accidently dropped your weapon! \nHow unfortunate!");
+                        break;
+                    }
+            }
+        }
 
 
         public void StartBattle()
         {
             Console.WriteLine("FIGHT TILL ONE DIES!!!!!!");
-            int[] numbers = {1, 2, 3};
-            foreach (int number in numbers)
+            for (int i = 0; i < 4; i++)
             {
-                Console.WriteLine(numbers);
+                Console.WriteLine((i+1) + ". ");
             }
             Console.WriteLine("Go!");
 
@@ -202,7 +283,7 @@ namespace HelloWorld
                 char input;
 
                 //Player One
-                GetInput(out input, "Attack", "Peace", "\nPlayer one! What do you wish to do?");
+                GetInput(out input, "Attack", "Peace", "Open Invatory", "\nPlayer one! What do you wish to do?");
 
                 if (input == '1')
                 {
@@ -213,11 +294,15 @@ namespace HelloWorld
                     Console.WriteLine("\nPlayer one went with a peaceful option! Hopefully Player two feels the same!");
 
                 }
+                if(input == '3')
+                {
+                    SwitchWeapons(_player1);
+                }
 
                 Continue();
 
                 //Player Two
-                GetInput(out input, "Attack", "Peace", "Player two! What do you wish to do?");
+                GetInput(out input, "Attack", "Peace", "Open Inventory", "Player two! What do you wish to do?");
 
                 if (input == '1')
                 {
@@ -227,6 +312,10 @@ namespace HelloWorld
                 {
                     Console.WriteLine("\nPlayer two went with a peaceful option! Hopefully Player one feels the same!");
 
+                }
+                if (input == '3')
+                {
+                    SwitchWeapons(_player2);
                 }
 
 

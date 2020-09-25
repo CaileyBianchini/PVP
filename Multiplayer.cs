@@ -258,7 +258,10 @@ namespace HelloWorld
 
                 if (input == '1')
                 {
-                    _player2.Attack(_player1);
+                    float totalDamage = _player2.Attack(_player1);
+                    Console.WriteLine(_player1.GetName() + " did " + totalDamage + " to " + _player2.GetName());
+                    totalDamage = _player2.Attack(_player1partner);
+                    Console.WriteLine(_player1partner.GetName() + " did " + totalDamage + " to " + _player2.GetName());
                 }
                 if (input == '2')
                 {
@@ -277,7 +280,10 @@ namespace HelloWorld
 
                 if (input == '1')
                 {
-                    _player1.Attack(_player2);
+                    float totalDamage = _player1.Attack(_player2);
+                    Console.WriteLine(_player2.GetName() + " did " + totalDamage + " to " + _player1.GetName());
+                    totalDamage = _player1.Attack(_player1partner);
+                    Console.WriteLine(_player2partner.GetName() + " did " + totalDamage + " to " + _player1.GetName());
                 }
                 if (input == '2')
                 {

@@ -46,7 +46,7 @@ namespace HelloWorld
         }
         public void PrintStats()
         {
-            Console.WriteLine("Name: " + _name);
+            Console.WriteLine("\nName: " + _name);
             Console.WriteLine("Health: " + _health);
             Console.WriteLine("Damage: " + _damage);
         }

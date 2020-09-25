@@ -94,24 +94,6 @@ namespace HelloWorld
             int tutorialbossattack = 1;
 
 
-            //mobs attacks and such
-            //mob
-            int mobattacks = 10;
-
-
-            //boss
-            int bossattacks = 20;
-            int specialbossattacks = 30; //minus 5 mana
-
-            float bossmana = 30.0f;
-
-
-            //big boss
-            int bigbossattck = 30;
-            int specialbigbossattck = 50; //minus 10
-            float bigbossmana = 30.0f;
-
-
             //Demon King
             int demonkinghealth = 300;
             int demonkingattack = 50;
@@ -151,6 +133,8 @@ namespace HelloWorld
             int goldcoins = 10;
             int silvercoins = 15;
             int coppercoins = 20;
+
+            
 
             //maxlevelreached = level == maxlevel;
 

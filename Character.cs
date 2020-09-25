@@ -22,15 +22,17 @@ namespace HelloWorld
             _name = nameVal;
             _damage = damageVal;
         }
-        public virtual void Attack(Character enemy)
+        public virtual float Attack(Character enemy)
         {
-            enemy.TakeDamage(_damage);
+            float damageTaken = enemy.TakeDamage(_damage);
+            return damageTaken;
         }
-        public virtual void TakeDamage(float damageVal)
+        public virtual float TakeDamage(float damageVal)
         {
             _health -= damageVal;
             if (_health < 0)
                 _health = 0;
+            return damageVal;
         }
 
         public string GetName()

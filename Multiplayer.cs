@@ -27,11 +27,7 @@ namespace HelloWorld
         private Items _hammer;
 
         //roles
-        private Items _hero;
-        private Items _assassin;
-        private Items _wizard;
-        private Items _barbarian;
-
+        
 
 
         //Run the game
@@ -68,17 +64,7 @@ namespace HelloWorld
             _hammer.statName = "Hammer";
         }
 
-        public void InitializeRole()
-        {
-            _hero.statBoost = 20;
-            _hero.statName = "Hero";
-            _assassin.statBoost = 13;
-            _assassin.statName = "Assassin";
-            _wizard.statBoost = 5;
-            _wizard.statName = "Wizard";
-            _barbarian.statBoost = 25;
-            _barbarian.statName = "Barbarian";
-        }
+       
 
 
         // INPUTS
@@ -183,25 +169,7 @@ namespace HelloWorld
         //Role
         public void SelectRoles(Player player)
         {
-            char input;
-            GetInput(out input, "Hero", "Assassin", "Wizard", "Barbarian", "CHOOSE YOUR CLASS!");
-
-            if (input == '1')
-            {
-                player.EquipRole(_hero);
-            }
-            if (input == '2')
-            {
-                player.EquipRole(_assassin);
-            }
-            if (input == '3')
-            {
-                player.EquipRole(_wizard);
-            }
-            if (input == '4')
-            {
-                player.EquipRole(_barbarian);
-            }
+            
 
         }
 
@@ -210,7 +178,7 @@ namespace HelloWorld
         {
             Console.WriteLine("What is your name?");
             string name = Console.ReadLine();
-            Player player = new Player(name, "Peasant", 100, 10, 3);
+            Player player = new Player(name, 100, 10, 3);
             //SelectItems(player);
             SelectLoadout(player);
             SelectRoles(player);
@@ -345,7 +313,6 @@ namespace HelloWorld
         {
             //InitializePlayers();
             InitializeItems();
-            InitializeRole();
         }
 
         //Repeated until the game ends

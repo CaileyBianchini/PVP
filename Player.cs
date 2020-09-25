@@ -4,31 +4,21 @@ using System.Text;
 
 namespace HelloWorld
 {
-    class Player
+    class Player : Character
     {
-        private string _name;
-        private string _roleName;
-        private int _health;
-        private int _baseDamage;
         private Items[] _inventory;
         private Items _currentWeapon;
         private Items _hands;
 
-        public Player()
+        public Player() : base()
         {
             _inventory = new Items[3];
-            _roleName = "Peasant";
-            _health = 100;
-            _baseDamage = 10;
             _hands.statName = "Your fugly hands";
             _hands.statBoost = 0;
         }
-        public Player(string nameVal, string roleVal, int healthVal, int damageVal, int inventorySize)
+        public Player(string nameVal, float healthVal, float damageVal, int inventorySize)
+            : base(damageVal, healthVal, nameVal)
         {
-            _name = nameVal;
-            _roleName = roleVal;
-            _health = healthVal;
-            _baseDamage = damageVal;
             _inventory = new Items[inventorySize];
             _hands.statName = "Your fugly hands";
             _hands.statBoost = 0;
@@ -52,7 +42,7 @@ namespace HelloWorld
         
         public void EquipItem(int itemIndex)
         {
-            if(Contains(itemIndex) == true);
+            if(Contains(itemIndex) == true)
             {
                 _currentWeapon = _inventory[itemIndex];
             }
@@ -68,47 +58,14 @@ namespace HelloWorld
             return _inventory;
         }
 
-        public void EquipRole(Items role)
-        {
-            _baseDamage += role.statBoost;
-            _roleName = role.statName;
-        }
 
-        public string GetName()
-        {
-            return _name;
-        }
-
-       //need to find out how to put role name
-
-        public bool GetIsAlive()
-        {
-            return _health > 0;
-        }
-
-        public void Attack(Player enemy)
+        public override void Attack(Character enemy)
         {
             
-            int totalDamage = _baseDamage + _currentWeapon.statBoost;
+            float totalDamage = _damage + _currentWeapon.statBoost;
             enemy.TakeDamage(totalDamage);
         }
 
-        public void PrintStats()
-        {
-            Console.WriteLine("Name: " + _name);
-            Console.WriteLine("Role: " + _roleName);
-            Console.WriteLine("Health: " + _health);
-            Console.WriteLine("Damage: " + _baseDamage);
-        }
-
-        public void TakeDamage(int damageVal)
-        {
-            if(GetIsAlive())
-            {
-                _health -= damageVal;
-            }
-            Console.WriteLine(_name + " took " + damageVal + " damage!!!");
-        }
 
 
     }

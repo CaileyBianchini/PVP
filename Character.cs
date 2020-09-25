@@ -6,6 +6,8 @@ namespace HelloWorld
 {
     class Character
     {
+        //this is mainly what allows the stats to change
+
         private float _health;
         protected float _damage;
         private string _name;

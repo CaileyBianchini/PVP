@@ -59,14 +59,5 @@ namespace HelloWorld
         }
 
 
-        public override void Attack(Character enemy)
-        {
-            
-            float totalDamage = _damage + _currentWeapon.statBoost;
-            enemy.TakeDamage(totalDamage);
-        }
-
-
-
     }
 }

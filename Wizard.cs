@@ -20,18 +20,20 @@ namespace HelloWorld
             _mana = manaVal;
         }
 
-        public override void Attack(Character enemy)
+        public override float Attack(Character enemy)
         {
+            float totalDamage = 0.0f;
             if(_mana >= 4)
             {
-                float totalDamage = _damage + _mana * .25f;
+                totalDamage = _damage + _mana * .25f;
                 _mana -= _mana * .25f;
                 //same as:
                 //_mana = _mana - (_mana x .25)
-                enemy.TakeDamage(totalDamage);
-                return;
+                totalDamage = enemy.TakeDamage(totalDamage);
+                return totalDamage;
             }
-            base.Attack(enemy);
+            totalDamage = base.Attack(enemy);
+            return totalDamage;
         }
     }
 }

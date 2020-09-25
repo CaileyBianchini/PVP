@@ -27,8 +27,11 @@ namespace HelloWorld
         private Items _hammer;
 
         //roles
-        
 
+
+        //companions
+        private Character _player1partner;
+        private Character _player2partner;
 
         //Run the game
         public void Run()
@@ -313,6 +316,8 @@ namespace HelloWorld
         {
             //InitializePlayers();
             InitializeItems();
+            _player1partner = new Wizard(128, 20, 100, "Wizard Lizard");
+            _player2partner = new Wizard(120, 20, 100, "Hary Wizard101"); // remember this!!!
         }
 
         //Repeated until the game ends
